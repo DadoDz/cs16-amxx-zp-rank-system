@@ -32,4 +32,4 @@ The plugin tracks player performance (kills, headshots, infections, deaths, etc.
 
 ## Notice
 > This plugin is written specifically for **Zombie Plague 4.3**.  
-> While rank systems already exist, this implementation was developed for my own server.
+> Rank systems already exist, this plugin was created for my own server.
