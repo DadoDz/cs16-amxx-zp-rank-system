@@ -11,7 +11,7 @@ The plugin tracks player performance (kills, headshots, infections, deaths, etc.
   - **Game**: Counter-Strike 1.6
   - **Mod**: Zombie Plague
 
-## 📦 Requirements
+## Requirements
 
 - AMX Mod X **1.9+**
 - Zombie Plague Mod
