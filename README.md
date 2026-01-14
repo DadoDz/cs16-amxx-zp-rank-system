@@ -31,5 +31,5 @@ The plugin tracks player performance (kills, headshots, infections, deaths, etc.
 | `/top15` | Displays the Top 15 ranked players |
 
 ## Notice
-> This plugin is written specifically for **Zombie Plague 4.3**.\n
-> Rank systems already exist, this plugin was created for my own server.\n
+> This plugin is written specifically for **Zombie Plague 4.3**.
+> Rank systems already exist, this plugin was created for my own server.
