@@ -33,3 +33,10 @@ The plugin tracks player performance (kills, headshots, infections, deaths, etc.
 ## Notice
 > This plugin is written specifically for **Zombie Plague 4.3**.
 > Rank systems already exist, this plugin was created for my own server.
+
+## Disclaimer
+
+Country flag images included in this project are used solely for identification and display purposes. All rights to national flags remain with their respective countries, governments, or relevant authorities.
+The author of this project does not claim ownership of any country flag or national symbol used within this repository.
+If you are a rights holder and believe any content should be credited differently or removed, please open an issue or contact the repository owner.
+
