@@ -61,7 +61,7 @@ public MySql_Init()
 
     new Handle:Queries;
     Queries = SQL_PrepareQuery(SqlConnection, 
-            "CREATE TABLE IF NOT EXISTS `player_rank` ( \
+            "CREATE TABLE IF NOT EXISTS `zp_rank_system` ( \
             `name` VARCHAR(32) NOT NULL PRIMARY KEY, \
             `kills` INT NOT NULL DEFAULT 0, \
             `hs_kills` INT NOT NULL DEFAULT 0, \
@@ -120,7 +120,7 @@ public client_disconnected(id)
         if(minutes_played > 0)
         {
             new szQuery[256];
-            format(szQuery, charsmax(szQuery), "UPDATE `player_rank` SET `hours_played` = `hours_played` + %d WHERE `name` = '%s';", minutes_played, g_playerstats[id][NAME]);
+            format(szQuery, charsmax(szQuery), "UPDATE `zp_rank_system` SET `hours_played` = `hours_played` + %d WHERE `name` = '%s';", minutes_played, g_playerstats[id][NAME]);
             SQL_ThreadQuery(g_SqlTuple, "IgnoreHandle", szQuery);
         }
     }
@@ -143,7 +143,7 @@ public SaveRank(id)
 
     if (is_user_registered(id) && is_user_logged(id))
     {
-        format(szTemp, charsmax(szTemp), "UPDATE `player_rank` SET `kills` = '%d' , `hs_kills` = '%d' , `infections` = '%d' , `infected` = '%d' , `deaths` = '%d' , `score` = '%d' , `hours_played` = '%d' WHERE `player_rank`.`name` = '%s';", 
+        format(szTemp, charsmax(szTemp), "UPDATE `zp_rank_system` SET `kills` = '%d' , `hs_kills` = '%d' , `infections` = '%d' , `infected` = '%d' , `deaths` = '%d' , `score` = '%d' , `hours_played` = '%d' WHERE `zp_rank_system`.`name` = '%s';", 
         g_playerstats[id][KILLS], g_playerstats[id][HS_KILLS], g_playerstats[id][INFECTIONS], g_playerstats[id][INFECTED], g_playerstats[id][DEATHS], g_playerstats[id][SCORE], g_playerstats[id][HOURS_PLAYED], g_playerstats[id][NAME]);
     }
 
@@ -160,7 +160,7 @@ public LoadRank(id)
     new Data[1];
     Data[0] = id;
 
-    format(szTemp, charsmax(szTemp), "SELECT * FROM `player_rank` WHERE (`player_rank`.`name` = '%s')", g_playerstats[id][NAME]);
+    format(szTemp, charsmax(szTemp), "SELECT * FROM `zp_rank_system` WHERE (`zp_rank_system`.`name` = '%s')", g_playerstats[id][NAME]);
     SQL_ThreadQuery(g_SqlTuple, "LoadPlayer_Handle", szTemp, Data, 1);
 }
 
@@ -176,7 +176,7 @@ public LoadPlayer_Handle(FailState, Handle:Query, Error[], Errcode, Data[], Data
     if(SQL_NumResults(Query) < 1)
     {
         new szTemp[512];
-        format(szTemp,charsmax(szTemp), "INSERT INTO `player_rank` ( `name` , `kills` , `hs_kills` , `infections` , `infected` , `deaths` , `score` , `hours_played`) VALUES ('%s' , '0' , '0' , '0' , '0' , '0' , '0', '0');", g_playerstats[id][NAME]);
+        format(szTemp,charsmax(szTemp), "INSERT INTO `zp_rank_system` ( `name` , `kills` , `hs_kills` , `infections` , `infected` , `deaths` , `score` , `hours_played`) VALUES ('%s' , '0' , '0' , '0' , '0' , '0' , '0', '0');", g_playerstats[id][NAME]);
         SQL_ThreadQuery(g_SqlTuple, "IgnoreHandle", szTemp);
 
         g_playerstats[id][KILLS] = 0;
@@ -288,7 +288,7 @@ public RankCMD(id)
         return PLUGIN_HANDLED;
 
     new szQuery[256];
-    format(szQuery, charsmax(szQuery), "SELECT name, kills, hs_kills, infections, infected, deaths, score FROM player_rank ORDER BY score DESC;");
+    format(szQuery, charsmax(szQuery), "SELECT name, kills, hs_kills, infections, infected, deaths, score FROM zp_rank_system ORDER BY score DESC;");
 
     new Data[1];
     Data[0] = id;
@@ -343,7 +343,7 @@ public HoursPlayedCMD(id)
 
     new szQuery[256];
     format(szQuery, charsmax(szQuery),
-        "SELECT `hours_played` FROM `player_rank` WHERE `name` = '%s';",
+        "SELECT `hours_played` FROM `zp_rank_system` WHERE `name` = '%s';",
         g_playerstats[id][NAME]);
 
     new Data[1];
@@ -396,7 +396,7 @@ public UpdateHours()
                 new minutes_played = floatround(seconds_played / 60.0);
 
                 format(szQuery, charsmax(szQuery), 
-                    "UPDATE `player_rank` SET `hours_played` = `hours_played` + %d WHERE `name` = '%s';", 
+                    "UPDATE `zp_rank_system` SET `hours_played` = `hours_played` + %d WHERE `name` = '%s';", 
                     minutes_played, g_playerstats[id][NAME]);
 
                 SQL_ThreadQuery(g_SqlTuple, "IgnoreHandle", szQuery);
@@ -408,6 +408,6 @@ public UpdateHours()
 
 public Top15CMD(id)
 {
-    show_motd(id, "http://------.com/game/index.php", "TOP PLAYERS LEADERBOARD");
+    show_motd(id, "http://------.com/website/index.php", "TOP PLAYERS LEADERBOARD");
     return PLUGIN_HANDLED;
 }
